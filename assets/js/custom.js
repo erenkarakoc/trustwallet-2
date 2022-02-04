@@ -132,6 +132,9 @@ fetch(
     })
     toTRY()
   })
+  .catch((err) => {
+    console.log("err")
+  })
 
 function toTRY() {
   fetch(
