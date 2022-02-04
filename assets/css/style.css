@@ -783,6 +783,8 @@ img{
     margin: 0px auto 15px;
     width: 60px;
     height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .wallet-balance-area .wallet-balance-box {
     width: calc(33.33% - 30px);

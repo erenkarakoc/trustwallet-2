@@ -124,15 +124,13 @@ fetch(
 )
   .then((res) => {
     if (res.status === 429) {
-      const rndInt = randomIntFromInterval(410, 434)
+      const rndInt = randomIntFromInterval(424, 434)
       $("#balance").html(rndInt.toString().slice(0, -9))
     }
 
     return res.json()
   })
   .then((data) => {
-    console.log(JSON.stringify(data))
-
     $(data).each((idx, val) => {
       if (val.asset_id === "BTC") {
         var price = val.price_usd
@@ -149,27 +147,14 @@ fetch(
         var balance_usd = price * 5.3697
         $("#TORNUSD").html(balance_usd)
       }
-      $("#totalUSD").html(
-        Number($("#BTCUSD").html()) +
-          Number($("#DOGEUSD").html()) +
-          Number($("#TORNUSD").html())
-      )
+      if (JSON.stringify(data).includes('"error":"Too many requests')) {
+        console.log("includes")
+      } else {
+        $("#balance").html(
+          Number($("#BTCUSD").html()) +
+            Number($("#DOGEUSD").html()) +
+            Number($("#TORNUSD").html())
+        )
+      }
     })
-    toTRY()
   })
-
-function toTRY() {
-  fetch(
-    "http://api.exchangeratesapi.io/v1/latest?access_key=9f0b059124149ba980d87e0ad89ed33c&symbols=USD,TRY&format=1"
-  )
-    .then((res) => {
-      return res.json()
-    })
-    .then((data) => {
-      $(data).each((idx, val) => {
-        var TRYUSD = val.rates.TRY / val.rates.USD
-
-        $("#totalTRY").html(Number($("#totalUSD").html()) * TRYUSD)
-      })
-    })
-}
