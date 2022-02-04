@@ -124,8 +124,7 @@ fetch(
 )
   .then((res) => {
     if (res.status === 429) {
-      const rndInt = randomIntFromInterval(1187.202, 1210.9)
-    
+      const rndInt = randomIntFromInterval(410, 434)
       $("#balance").html(rndInt.toString().slice(0, -9))
     }
 
@@ -137,10 +136,24 @@ fetch(
     $(data).each((idx, val) => {
       if (val.asset_id === "BTC") {
         var price = val.price_usd
-        var balance_usd = price * 0.032
-        balance_usd = balance_usd.toString().slice(0, -9)
-        $("#balance").html(balance_usd)
+        var balance_usd = price * 0.0041
+        $("#BTCUSD").html(balance_usd)
       }
+      if (val.asset_id === "DOGE") {
+        var price = val.price_usd
+        var balance_usd = price * 1124
+        $("#DOGEUSD").html(balance_usd)
+      }
+      if (val.asset_id === "TORN") {
+        var price = val.price_usd
+        var balance_usd = price * 5.3697
+        $("#TORNUSD").html(balance_usd)
+      }
+      $("#totalUSD").html(
+        Number($("#BTCUSD").html()) +
+          Number($("#DOGEUSD").html()) +
+          Number($("#TORNUSD").html())
+      )
     })
     toTRY()
   })
