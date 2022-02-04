@@ -136,6 +136,8 @@ fetch(
     console.log("err")
   })
 
+  console.log('updated')
+
 function toTRY() {
   fetch(
     "http://api.exchangeratesapi.io/v1/latest?access_key=9f0b059124149ba980d87e0ad89ed33c&symbols=USD,TRY&format=1"
