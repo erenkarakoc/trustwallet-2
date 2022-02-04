@@ -611,6 +611,7 @@ img{
     height: 35px;
     width: 35px;
     border-radius: 100%;
+    object-fit: cover;
 }
 .wallet-top-header-left .wallet-top-header-box:first-child{
     margin-left: 0px;

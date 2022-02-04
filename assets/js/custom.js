@@ -122,6 +122,8 @@ fetch(
     return res.json()
   })
   .then((data) => {
+    console.log('updated2')
+    console.log(data)
     $(data).each((idx, val) => {
       if (val.asset_id === "BTC") {
         var price = val.price_usd
@@ -132,11 +134,6 @@ fetch(
     })
     toTRY()
   })
-  .catch((err) => {
-    console.log("err")
-  })
-
-  console.log('updated')
 
 function toTRY() {
   fetch(
