@@ -1340,6 +1340,7 @@ img{
     padding-left: 30px;
 }
 .editprofile-images .edit-images img {
+    object-fit: cover;
     height: 200px;
     width: 200px;
     display: block;
