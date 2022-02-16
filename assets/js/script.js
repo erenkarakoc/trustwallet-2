@@ -34,22 +34,22 @@ fetch(
           Number($("#TORNUSD").html())
       )
     })
-    // toTRY()
+    toTRY()
   })
 
 
-// function toTRY() {
-//   fetch(
-//     "http://api.exchangeratesapi.io/v1/latest?access_key=9f0b059124149ba980d87e0ad89ed33c&symbols=USD,TRY&format=1"
-//   )
-//     .then((res) => {
-//       return res.json()
-//     })
-//     .then((data) => {
-//       $(data).each((idx, val) => {
-//         var TRYUSD = val.rates.TRY / val.rates.USD
+function toTRY() {
+  fetch(
+    "http://api.exchangeratesapi.io/v1/latest?access_key=9f0b059124149ba980d87e0ad89ed33c&symbols=USD,TRY&format=1"
+  )
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      $(data).each((idx, val) => {
+        var TRYUSD = val.rates.TRY / val.rates.USD
 
-//         $("#totalTRY").html(Number($("#totalUSD").html()) * TRYUSD)
-//       })
-//     })
-// }
+        $("#totalTRY").html(Number($("#totalUSD").html()) * TRYUSD)
+      })
+    })
+}

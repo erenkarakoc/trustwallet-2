@@ -9,16 +9,8 @@ function googleTranslateElementInit() {
   )
 }
 window.onload = function () {
-  var themeClr = $.cookie("theme-color")
-  var darkmode = $.cookie("dark-mode")
-  if (darkmode == "on") {
-    $("body").addClass("dark-mode")
-    $("#theme-change").prop("checked", true)
-  } else {
-    $("body").removeClass("dark-mode")
-    $("#theme-change").prop("checked", false)
-  }
-  $("body").addClass(themeClr)
+  $("body").addClass("dark-mode")
+
   if (document.readyState == "complete") {
     $(".loader-images img").attr("src", "")
     $(".loader-images img").attr("src", "images/loader.svg")
@@ -126,35 +118,33 @@ fetch(
     if (res.status === 429) {
       const rndInt = randomIntFromInterval(424, 434)
       $("#balance").html(rndInt.toString().slice(0, -9))
+    } else {
+      return res.json()
     }
-
-    return res.json()
   })
   .then((data) => {
     $(data).each((idx, val) => {
+      var price
+      var btc_balance_usd
+      var doge_balance_usd
+      var torn_balance_usd
+
       if (val.asset_id === "BTC") {
         var price = val.price_usd
-        var balance_usd = price * 0.0041
-        $("#BTCUSD").html(balance_usd)
+        var btc_balance_usd = price * 0.0041
+        $("#BTCUSD").html(btc_balance_usd)
       }
       if (val.asset_id === "DOGE") {
         var price = val.price_usd
-        var balance_usd = price * 1124
-        $("#DOGEUSD").html(balance_usd)
+        var doge_balance_usd = price * 1124
+        $("#DOGEUSD").html(doge_balance_usd)
       }
       if (val.asset_id === "TORN") {
         var price = val.price_usd
-        var balance_usd = price * 5.3697
-        $("#TORNUSD").html(balance_usd)
+        var torn_balance_usd = price * 5.3697
+        $("#TORNUSD").html(torn_balance_usd)
       }
-      if (JSON.stringify(data).includes('"error":"Too many requests')) {
-        console.log("includes")
-      } else {
-        $("#balance").html(
-          Number($("#BTCUSD").html()) +
-            Number($("#DOGEUSD").html()) +
-            Number($("#TORNUSD").html())
-        )
-      }
+
+      $("#balance").html(btc_balance_usd + doge_balance_usd + torn_balance_usd)
     })
   })
