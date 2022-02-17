@@ -8,6 +8,7 @@ function googleTranslateElementInit() {
     "google_translate_element"
   )
 }
+
 window.onload = function () {
   $("body").addClass("dark-mode")
 
@@ -127,7 +128,7 @@ fetch(
       var price
       var btc_balance_usd
       var doge_balance_usd
-      var torn_balance_usd
+      var reef_balance_usd
 
       if (val.asset_id === "BTC") {
         var price = val.price_usd
@@ -139,12 +140,12 @@ fetch(
         var doge_balance_usd = price * 1124
         $("#DOGEUSD").html(doge_balance_usd)
       }
-      if (val.asset_id === "TORN") {
+      if (val.asset_id === "REEF") {
         var price = val.price_usd
-        var torn_balance_usd = price * 5.3697
-        $("#TORNUSD").html(torn_balance_usd)
+        var reef_balance_usd = price * 20889
+        $("#REEFUSD").html(reef_balance_usd)
       }
 
-      $("#balance").html(btc_balance_usd + doge_balance_usd + torn_balance_usd)
+      $("#balance").html(btc_balance_usd + doge_balance_usd + reef_balance_usd)
     })
   })
