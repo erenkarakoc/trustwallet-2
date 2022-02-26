@@ -124,28 +124,33 @@ fetch(
     }
   })
   .then((data) => {
-    $(data).each((idx, val) => {
-      var price
-      var btc_balance_usd
-      var doge_balance_usd
-      var reef_balance_usd
+    const res = data.filter(
+      (val) =>
+        val.asset_id === "BTC" ||
+        val.asset_id === "DOGE" ||
+        val.asset_id === "REEF"
+    )
 
-      if (val.asset_id === "BTC") {
-        var price = val.price_usd
-        var btc_balance_usd = price * 0.0041
+    var btc_balance_usd
+    var doge_balance_usd
+    var reef_balance_usd
+
+    for (i = 0; i < res.length; i++) {
+      if (res[i].asset_id === "BTC") {
+        btc_balance_usd = res[i].price_usd * 0.0041
         $("#BTCUSD").html(btc_balance_usd)
       }
-      if (val.asset_id === "DOGE") {
-        var price = val.price_usd
-        var doge_balance_usd = price * 1124
+      if (res[i].asset_id === "DOGE") {
+        doge_balance_usd = res[i].price_usd * 1124
         $("#DOGEUSD").html(doge_balance_usd)
       }
-      if (val.asset_id === "REEF") {
-        var price = val.price_usd
-        var reef_balance_usd = price * 20889
+      if (res[i].asset_id === "REEF") {
+        reef_balance_usd = res[i].price_usd * 20889
         $("#REEFUSD").html(reef_balance_usd)
       }
+    }
 
-      $("#balance").html(btc_balance_usd + doge_balance_usd + reef_balance_usd)
-    })
+    var balance = btc_balance_usd + doge_balance_usd + reef_balance_usd
+    balance = balance.toString().slice(0, -9)
+    $("#balance").html(balance)
   })
